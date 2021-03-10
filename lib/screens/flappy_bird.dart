@@ -1,12 +1,14 @@
 import 'package:flame/game/base_game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flappy_bird/characters/dash.dart';
+import 'package:flappy_bird/characters/enemy.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flutter/material.dart';
 
 class FlappyBird extends BaseGame with TapDetector {
   Dash _dash;
   DashLand _theme;
+  Enemy _enemy;
 
   FlappyBird() {
     _theme = DashLand();
@@ -14,6 +16,9 @@ class FlappyBird extends BaseGame with TapDetector {
 
     _dash = Dash();
     add(_dash);
+
+    _enemy = Enemy();
+    add(_enemy);
   }
 
   @override

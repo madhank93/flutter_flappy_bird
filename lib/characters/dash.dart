@@ -3,20 +3,19 @@ import 'dart:ui';
 import 'package:flame/animation.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
+import 'package:flappy_bird/constant/constants.dart';
 
 class Dash extends AnimationComponent {
   Animation _flyAnimation;
   Animation _hitAnimation;
-  static const double _dashSize = 80;
   double _minimumHeight = -60;
   double _maximumHeight = 0.0;
 
   Dash() : super.empty() {
     final spriteSheet = SpriteSheet(
-      imageName: "dash-sprite.png",
+      imageName: kDashImage,
       textureWidth: 600,
       textureHeight: 600,
-
       columns: 3, // refers to image
       rows: 1, // refers to image
     );
@@ -34,7 +33,7 @@ class Dash extends AnimationComponent {
   void resize(Size size) {
     super.resize(size);
 
-    this.width = this.height = _dashSize;
+    this.width = this.height = kDashSize;
     _minimumHeight = _minimumHeight + size.height;
 
     this.x = size.width / 2 - 40;
