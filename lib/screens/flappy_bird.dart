@@ -1,25 +1,24 @@
-import 'package:flame/components/parallax_component.dart';
 import 'package:flame/game/base_game.dart';
+import 'package:flame/gestures.dart';
 import 'package:flappy_bird/characters/dash.dart';
+import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flutter/material.dart';
 
-class FlappyBird extends BaseGame {
+class FlappyBird extends BaseGame with TapDetector {
   Dash _dash;
-  ParallaxComponent _parallax;
+  DashLand _theme;
 
   FlappyBird() {
-    _parallax = ParallaxComponent(
-      [
-        ParallaxImage("parallax/parallax-1.png"),
-        ParallaxImage("parallax/parallax-2.png", fill: LayerFill.none),
-      ],
-      baseSpeed: Offset(100, 0),
-      layerDelta: Offset(20, 0),
-    );
-
-    add(_parallax);
+    _theme = DashLand();
+    add(_theme);
 
     _dash = Dash();
     add(_dash);
+  }
+
+  @override
+  void onTapDown(TapDownDetails details) {
+    super.onTapDown(details);
+    _dash.jump();
   }
 }

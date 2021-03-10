@@ -7,6 +7,9 @@ import 'package:flame/spritesheet.dart';
 class Dash extends AnimationComponent {
   Animation _flyAnimation;
   Animation _hitAnimation;
+  static const double _dashSize = 80;
+  double _minimumHeight = -60;
+  double _maximumHeight = 0.0;
 
   Dash() : super.empty() {
     final spriteSheet = SpriteSheet(
@@ -31,10 +34,11 @@ class Dash extends AnimationComponent {
   void resize(Size size) {
     super.resize(size);
 
-    this.width = this.height = 80;
+    this.width = this.height = _dashSize;
+    _minimumHeight = _minimumHeight + size.height;
 
-    this.x = size.height / 5;
-    this.y = size.width / 1.5;
+    this.x = size.width / 2 - 40;
+    this.y = size.height / 2 - 40;
   }
 
   void flyAnimation() {
@@ -43,5 +47,21 @@ class Dash extends AnimationComponent {
 
   void hitAnimation() {
     this.animation = _hitAnimation;
+  }
+
+  @override
+  void update(double time) {
+    super.update(time);
+    if (isFlying()) {
+      this.y = this.y + 1.5;
+    }
+  }
+
+  void jump() {
+    this.y = this.y - 25;
+  }
+
+  bool isFlying() {
+    return (this.y >= _maximumHeight && this.y <= _minimumHeight);
   }
 }
