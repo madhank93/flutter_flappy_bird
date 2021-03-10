@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
-import 'package:flappy_bird/constant/constants.dart';
+import 'package:flappy_bird/constant/game_constants.dart';
 
 class Enemy extends AnimationComponent {
   Enemy() : super.empty() {
