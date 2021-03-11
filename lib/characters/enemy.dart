@@ -2,12 +2,25 @@ import 'dart:ui';
 
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
+import 'package:flappy_bird/characters/enemy_data.dart';
+import 'package:flappy_bird/characters/enemy_type.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 
 class Enemy extends AnimationComponent {
-  Enemy() : super.empty() {
+  static const Map<EnemyType, EnemyData> _enemyDetails = {
+    EnemyType.Corona: EnemyData(
+        imageName: kEnemyImage,
+        textureWidth: 64,
+        textureHeight: 64,
+        columns: 2,
+        rows: 1)
+  };
+
+  Enemy(EnemyType enemyType) : super.empty() {
+    EnemyData _data = _enemyDetails[enemyType];
+
     final spriteSheet = SpriteSheet(
-      imageName: kEnemyImage,
+      imageName: _data.imageName,
       textureWidth: 64,
       textureHeight: 64,
       columns: 2, // refers to image
