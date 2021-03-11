@@ -18,7 +18,7 @@ class FlappyBird extends BaseGame with TapDetector {
     _dash = DashController();
     add(_dash);
 
-    _enemy = EnemyController(EnemyType.Corona);
+    _enemy = EnemyController(EnemyType.Helicopter);
     add(_enemy);
   }
 

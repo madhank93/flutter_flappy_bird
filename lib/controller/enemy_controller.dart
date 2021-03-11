@@ -12,11 +12,17 @@ class EnemyController extends AnimationComponent {
 
   static const Map<EnemyType, Enemy> _enemyDetails = {
     EnemyType.Corona: Enemy(
-        imageName: kEnemyImage,
+        imageName: kCoronaEnemyImage,
         textureWidth: 64,
         textureHeight: 64,
         columns: 2,
-        rows: 1)
+        rows: 1),
+    EnemyType.Helicopter: Enemy(
+        imageName: kHelicopterEnemyImage,
+        textureWidth: 228,
+        textureHeight: 228,
+        columns: 2,
+        rows: 1),
   };
 
   EnemyController(EnemyType enemyType) : super.empty() {
@@ -38,7 +44,7 @@ class EnemyController extends AnimationComponent {
     super.resize(size);
     this.size = size;
 
-    this.width = this.height = kEnemySize;
+    this.width = this.height = kCoronaEnemySize;
 
     this.x = size.width / 2 + 40;
     this.y = size.height / 2 - 40;
