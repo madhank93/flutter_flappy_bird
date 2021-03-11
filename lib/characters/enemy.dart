@@ -7,6 +7,9 @@ import 'package:flappy_bird/characters/enemy_type.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 
 class Enemy extends AnimationComponent {
+  double enemySpeed = 200;
+  Size size;
+
   static const Map<EnemyType, EnemyData> _enemyDetails = {
     EnemyType.Corona: EnemyData(
         imageName: kEnemyImage,
@@ -21,10 +24,10 @@ class Enemy extends AnimationComponent {
 
     final spriteSheet = SpriteSheet(
       imageName: _data.imageName,
-      textureWidth: 64,
-      textureHeight: 64,
-      columns: 2, // refers to image
-      rows: 1, // refers to image
+      textureWidth: _data.textureWidth,
+      textureHeight: _data.textureHeight,
+      columns: _data.columns, // refers to image
+      rows: _data.rows, // refers to image
     );
 
     this.animation = spriteSheet.createAnimation(0, stepTime: .1);
@@ -33,6 +36,7 @@ class Enemy extends AnimationComponent {
   @override
   void resize(Size size) {
     super.resize(size);
+    this.size = size;
 
     this.width = this.height = kEnemySize;
 
@@ -43,5 +47,10 @@ class Enemy extends AnimationComponent {
   @override
   void update(double time) {
     super.update(time);
+    this.x -= enemySpeed * time;
+
+    if (this.x < (-this.width)) {
+      this.x = size.width + this.width;
+    }
   }
 }
