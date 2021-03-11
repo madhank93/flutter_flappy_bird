@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 
-class EnemyData {
+class Enemy {
   final String imageName;
   final int textureWidth;
   final int textureHeight;
   final int columns;
   final int rows;
 
-  const EnemyData({
+  const Enemy({
     @required this.imageName,
     @required this.textureWidth,
     @required this.textureHeight,

@@ -2,16 +2,16 @@ import 'dart:ui';
 
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
-import 'package:flappy_bird/characters/enemy_data.dart';
-import 'package:flappy_bird/characters/enemy_type.dart';
+import 'package:flappy_bird/model/enemy.dart';
+import 'package:flappy_bird/model/enemy_type.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 
-class Enemy extends AnimationComponent {
+class EnemyController extends AnimationComponent {
   double enemySpeed = 200;
   Size size;
 
-  static const Map<EnemyType, EnemyData> _enemyDetails = {
-    EnemyType.Corona: EnemyData(
+  static const Map<EnemyType, Enemy> _enemyDetails = {
+    EnemyType.Corona: Enemy(
         imageName: kEnemyImage,
         textureWidth: 64,
         textureHeight: 64,
@@ -19,8 +19,8 @@ class Enemy extends AnimationComponent {
         rows: 1)
   };
 
-  Enemy(EnemyType enemyType) : super.empty() {
-    EnemyData _data = _enemyDetails[enemyType];
+  EnemyController(EnemyType enemyType) : super.empty() {
+    Enemy _data = _enemyDetails[enemyType];
 
     final spriteSheet = SpriteSheet(
       imageName: _data.imageName,

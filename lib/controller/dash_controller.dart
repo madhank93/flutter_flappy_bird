@@ -5,13 +5,13 @@ import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 
-class Dash extends AnimationComponent {
+class DashController extends AnimationComponent {
   Animation _flyAnimation;
   Animation _hitAnimation;
   double _minimumHeight = -60;
   double _maximumHeight = 0.0;
 
-  Dash() : super.empty() {
+  DashController() : super.empty() {
     final spriteSheet = SpriteSheet(
       imageName: kDashImage,
       textureWidth: 600,
