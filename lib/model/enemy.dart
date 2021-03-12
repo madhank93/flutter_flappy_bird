@@ -6,6 +6,7 @@ class Enemy {
   final int textureHeight;
   final int columns;
   final int rows;
+  final double speed;
 
   const Enemy({
     @required this.imageName,
@@ -13,5 +14,6 @@ class Enemy {
     @required this.textureHeight,
     @required this.columns,
     @required this.rows,
+    @required this.speed,
   });
 }

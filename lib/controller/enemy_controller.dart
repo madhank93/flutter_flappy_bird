@@ -8,26 +8,30 @@ import 'package:flappy_bird/model/enemy_type.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 
 class EnemyController extends AnimationComponent {
-  double enemySpeed = 200;
   Size size;
+  Enemy _data;
 
   static const Map<EnemyType, Enemy> _enemyDetails = {
     EnemyType.Corona: Enemy(
-        imageName: kCoronaEnemyImage,
-        textureWidth: 64,
-        textureHeight: 64,
-        columns: 2,
-        rows: 1),
+      imageName: kCoronaEnemyImage,
+      textureWidth: 64,
+      textureHeight: 64,
+      columns: 2,
+      rows: 1,
+      speed: 200,
+    ),
     EnemyType.Helicopter: Enemy(
-        imageName: kHelicopterEnemyImage,
-        textureWidth: 228,
-        textureHeight: 228,
-        columns: 2,
-        rows: 1),
+      imageName: kHelicopterEnemyImage,
+      textureWidth: 228,
+      textureHeight: 228,
+      columns: 2,
+      rows: 1,
+      speed: 300,
+    ),
   };
 
   EnemyController(EnemyType enemyType) : super.empty() {
-    Enemy _data = _enemyDetails[enemyType];
+    _data = _enemyDetails[enemyType];
 
     final spriteSheet = SpriteSheet(
       imageName: _data.imageName,
@@ -56,7 +60,7 @@ class EnemyController extends AnimationComponent {
   @override
   void update(double time) {
     super.update(time);
-    this.x -= enemySpeed * time;
+    this.x -= _data.speed * time;
   }
 
   @override
