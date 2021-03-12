@@ -3,6 +3,7 @@ import 'package:flame/game/base_game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/position.dart';
 import 'package:flappy_bird/controller/dash_controller.dart';
+import 'package:flappy_bird/controller/enemy_controller.dart';
 import 'package:flappy_bird/controller/enemy_manager.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,13 @@ class FlappyBird extends BaseGame with TapDetector {
     super.update(time);
     score += (60 * time).toInt();
     _scoreTextComponent.text = score.toString();
+
+    components.whereType<EnemyController>().forEach((enemy) {
+      print(_dash.distance(enemy));
+      if (_dash.distance(enemy) < 20) {
+        _dash.hitAnimation();
+      }
+    });
   }
 
   @override

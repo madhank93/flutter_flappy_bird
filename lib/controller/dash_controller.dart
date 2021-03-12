@@ -1,17 +1,32 @@
 import 'dart:ui';
 
+import 'package:flame/anchor.dart';
 import 'package:flame/animation.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
+import 'package:flame/time.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 
 class DashController extends AnimationComponent {
   Animation _flyAnimation;
   Animation _hitAnimation;
-  double _minimumHeight = -60;
+  double _minimumHeight = -20;
   double _maximumHeight = 0.0;
+  Timer _hitAnimationTimer;
+  bool _isHit;
 
   DashController() : super.empty() {
+    _isHit = false;
+
+    this.anchor = Anchor.center;
+
+    _hitAnimationTimer = Timer(
+      2,
+      callback: () {
+        flyAnimation();
+      },
+    );
+
     final spriteSheet = SpriteSheet(
       imageName: kDashImage,
       textureWidth: 600,
@@ -36,16 +51,21 @@ class DashController extends AnimationComponent {
     this.width = this.height = kDashSize;
     _minimumHeight = _minimumHeight + size.height;
 
-    this.x = size.width / 2 - 40;
-    this.y = size.height / 2 - 40;
+    this.x = size.width / 2;
+    this.y = size.height / 2;
   }
 
   void flyAnimation() {
+    _isHit = false;
     this.animation = _flyAnimation;
   }
 
   void hitAnimation() {
-    this.animation = _hitAnimation;
+    if (!_isHit) {
+      this.animation = _hitAnimation;
+      _hitAnimationTimer.start();
+      _isHit = true;
+    }
   }
 
   @override
@@ -54,6 +74,7 @@ class DashController extends AnimationComponent {
     if (isFlying()) {
       this.y = this.y + 1.5;
     }
+    _hitAnimationTimer.update(time);
   }
 
   void jump() {
