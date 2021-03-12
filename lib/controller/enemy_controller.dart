@@ -46,7 +46,7 @@ class EnemyController extends AnimationComponent {
 
     this.width = this.height = kCoronaEnemySize;
 
-    this.x = size.width / 2 + 40;
+    this.x = size.width;
     this.y = size.height / 2 - 40;
   }
 
@@ -54,9 +54,5 @@ class EnemyController extends AnimationComponent {
   void update(double time) {
     super.update(time);
     this.x -= enemySpeed * time;
-
-    if (this.x < (-this.width)) {
-      this.x = size.width + this.width;
-    }
   }
 }
