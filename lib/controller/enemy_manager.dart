@@ -11,9 +11,11 @@ import 'package:flappy_bird/screens/flappy_bird.dart';
 class EnemyManager extends Component with HasGameRef<FlappyBird> {
   Random _random;
   Timer _timer;
+  int _spawnLevel;
 
   EnemyManager() {
     _random = Random();
+    _spawnLevel = 0;
     _timer = Timer(
       4,
       repeat: true,
@@ -43,5 +45,23 @@ class EnemyManager extends Component with HasGameRef<FlappyBird> {
   @override
   void update(double time) {
     _timer.update(time);
+
+    var newSpawnLevel = gameRef.score ~/ 500;
+
+    if (_spawnLevel < newSpawnLevel) {
+      _spawnLevel = newSpawnLevel;
+      _timer.stop();
+
+      double newWaitTimer = (4 / (1 + (0.1 * _spawnLevel)));
+
+      _timer = Timer(
+        newWaitTimer,
+        repeat: true,
+        callback: () {
+          spawnRandomEnemy();
+        },
+      );
+      _timer.start();
+    }
   }
 }

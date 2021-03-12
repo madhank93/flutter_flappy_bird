@@ -12,14 +12,14 @@ class FlappyBird extends BaseGame with TapDetector {
   DashLand _theme;
   EnemyManager _enemyManager;
   TextComponent _scoreTextComponent;
-  int _score;
+  int score;
 
   FlappyBird() {
     _theme = DashLand();
     add(_theme);
 
-    _score = 0;
-    _scoreTextComponent = TextComponent(_score.toString());
+    score = 0;
+    _scoreTextComponent = TextComponent(score.toString());
     add(_scoreTextComponent);
 
     _dash = DashController();
@@ -38,8 +38,8 @@ class FlappyBird extends BaseGame with TapDetector {
   @override
   void update(double time) {
     super.update(time);
-    _score += (60 * time).toInt();
-    _scoreTextComponent.text = _score.toString();
+    score += (60 * time).toInt();
+    _scoreTextComponent.text = score.toString();
   }
 
   @override
