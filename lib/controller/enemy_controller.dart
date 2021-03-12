@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/components/animation_component.dart';
@@ -47,12 +48,19 @@ class EnemyController extends AnimationComponent {
     this.width = this.height = kCoronaEnemySize;
 
     this.x = size.width;
-    this.y = size.height / 2 - 40;
+    this.y = (size.height / 4) +
+        Random().nextInt(size.height.toInt() - (size.height ~/ 4));
+    print(this.y);
   }
 
   @override
   void update(double time) {
     super.update(time);
     this.x -= enemySpeed * time;
+  }
+
+  @override
+  bool destroy() {
+    return (this.x < -(this.width));
   }
 }
