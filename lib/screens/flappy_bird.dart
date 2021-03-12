@@ -3,15 +3,14 @@ import 'package:flame/game/base_game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/position.dart';
 import 'package:flappy_bird/controller/dash_controller.dart';
-import 'package:flappy_bird/controller/enemy_controller.dart';
-import 'package:flappy_bird/model/enemy_type.dart';
+import 'package:flappy_bird/controller/enemy_manager.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flutter/material.dart';
 
 class FlappyBird extends BaseGame with TapDetector {
   DashController _dash;
   DashLand _theme;
-  EnemyController _enemy;
+  EnemyManager _enemyManager;
   TextComponent _scoreTextComponent;
   int _score;
 
@@ -26,8 +25,8 @@ class FlappyBird extends BaseGame with TapDetector {
     _dash = DashController();
     add(_dash);
 
-    _enemy = EnemyController(EnemyType.Helicopter);
-    add(_enemy);
+    _enemyManager = EnemyManager();
+    add(_enemyManager);
   }
 
   @override
@@ -36,12 +35,14 @@ class FlappyBird extends BaseGame with TapDetector {
     _dash.jump();
   }
 
+  @override
   void update(double time) {
     super.update(time);
     _score += (60 * time).toInt();
     _scoreTextComponent.text = _score.toString();
   }
 
+  @override
   void resize(Size size) {
     super.resize(size);
     _scoreTextComponent.setByPosition(
