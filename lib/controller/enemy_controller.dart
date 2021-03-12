@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flame/anchor.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
 import 'package:flappy_bird/model/enemy.dart';
@@ -32,6 +33,8 @@ class EnemyController extends AnimationComponent {
 
   EnemyController(EnemyType enemyType) : super.empty() {
     _data = _enemyDetails[enemyType];
+
+    this.anchor = Anchor.center;
 
     final spriteSheet = SpriteSheet(
       imageName: _data.imageName,
