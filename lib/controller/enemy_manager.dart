@@ -63,4 +63,15 @@ class EnemyManager extends Component with HasGameRef<FlappyBird> {
       _timer.start();
     }
   }
+
+  void resetGame() {
+    _spawnLevel = 0;
+    _timer = Timer(
+      4,
+      repeat: true,
+      callback: () {
+        spawnRandomEnemy();
+      },
+    );
+  }
 }

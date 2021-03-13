@@ -8,6 +8,8 @@ import 'package:flappy_bird/constant/game_constants.dart';
 import 'package:flappy_bird/controller/dash_controller.dart';
 import 'package:flappy_bird/controller/enemy_controller.dart';
 import 'package:flappy_bird/controller/enemy_manager.dart';
+import 'package:flappy_bird/model/enemy.dart';
+import 'package:flappy_bird/model/enemy_type.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flutter/material.dart';
 
@@ -54,10 +56,70 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     score += (60 * time).toInt();
     _scoreTextComponent.text = score.toString();
 
+    components.whereType<EnemyController>().forEach(
+      (enemy) {
+        if (_dash.distance(enemy) < kEnemySize) {
+          _dash.hitAnimation();
+        }
+      },
+    );
+
+    if (_dash.life.value <= 0) {
+      gameOver();
+    }
+  }
+
+  void gameOver() {
+    pauseEngine();
+    addWidgetOverlay('gameOverMenu', _gameOverMenu());
+  }
+
+  Widget _gameOverMenu() {
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        color: Colors.white.withOpacity(0.5),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 50,
+            vertical: 40,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Game Over",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                "Your score is $score",
+                style: TextStyle(fontSize: 30),
+              ),
+              IconButton(
+                  iconSize: 50,
+                  icon: Icon(Icons.replay),
+                  onPressed: () {
+                    resetGame();
+                    removeWidgetOverlay("gameOverMenu");
+                    resumeEngine();
+                  })
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  resetGame() {
+    score = 0;
+    _dash.life.value = 3;
+    _dash.flyAnimation();
+    _enemyManager.resetGame();
     components.whereType<EnemyController>().forEach((enemy) {
-      if (_dash.distance(enemy) < kEnemySize) {
-        _dash.hitAnimation();
-      }
+      markToRemove(enemy);
     });
   }
 
