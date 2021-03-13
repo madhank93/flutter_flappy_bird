@@ -33,7 +33,6 @@ class EnemyManager extends Component with HasGameRef<FlappyBird> {
 
   void spawnRandomEnemy() {
     final randomNumber = _random.nextInt(EnemyType.values.length);
-    print(randomNumber);
     final randomEnemyType = EnemyType.values.elementAt(randomNumber);
     final newEnemy = EnemyController(randomEnemyType);
     gameRef.addLater(newEnemy);

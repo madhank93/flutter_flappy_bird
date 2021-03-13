@@ -58,7 +58,6 @@ class EnemyController extends AnimationComponent {
     this.y = (size.height / 6) +
         Random().nextInt(
             (size.height.toInt() - size.height ~/ 6) - (size.height ~/ 6));
-    print(this.y);
   }
 
   @override

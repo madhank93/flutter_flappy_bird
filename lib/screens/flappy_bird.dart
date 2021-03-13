@@ -55,7 +55,6 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     _scoreTextComponent.text = score.toString();
 
     components.whereType<EnemyController>().forEach((enemy) {
-      print(_dash.distance(enemy));
       if (_dash.distance(enemy) < kEnemySize) {
         _dash.hitAnimation();
       }
@@ -71,15 +70,38 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
   }
 
   Widget _headsOverDisplay() {
-    return IconButton(
-      icon: Icon(
-        Icons.pause,
-        color: Colors.white,
-        size: 30,
-      ),
-      onPressed: () {
-        _pauseGame();
-      },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.pause,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () {
+            _pauseGame();
+          },
+        ),
+        ValueListenableBuilder(
+          valueListenable: _dash.life,
+          builder: (BuildContext context, int value, Widget child) {
+            final list = <Widget>[];
+
+            for (int i = 0; i < 3; i++) {
+              list.add(
+                Icon(
+                  i < value ? Icons.favorite : Icons.favorite_border,
+                  color: Colors.blue,
+                ),
+              );
+            }
+            return Row(
+              children: list,
+            );
+          },
+        )
+      ],
     );
   }
 

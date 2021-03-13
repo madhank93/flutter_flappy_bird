@@ -6,6 +6,7 @@ import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
 import 'package:flame/time.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
+import 'package:flutter/foundation.dart';
 
 class DashController extends AnimationComponent {
   Animation _flyAnimation;
@@ -14,9 +15,12 @@ class DashController extends AnimationComponent {
   double _maximumHeight = 0.0;
   Timer _hitAnimationTimer;
   bool _isHit;
+  ValueNotifier<int> life;
+  int topOrBottomTouchCount = 0;
 
   DashController() : super.empty() {
     _isHit = false;
+    life = ValueNotifier(3);
 
     this.anchor = Anchor.center;
 
@@ -63,6 +67,7 @@ class DashController extends AnimationComponent {
   void hitAnimation() {
     if (!_isHit) {
       this.animation = _hitAnimation;
+      life.value -= 1;
       _hitAnimationTimer.start();
       _isHit = true;
     }
@@ -73,6 +78,12 @@ class DashController extends AnimationComponent {
     super.update(time);
     if (isFlying()) {
       this.y = this.y + 1.5;
+    } else {
+      ++topOrBottomTouchCount;
+    }
+
+    if (topOrBottomTouchCount > 1) {
+      life.value = 0;
     }
     _hitAnimationTimer.update(time);
   }
