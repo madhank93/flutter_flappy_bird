@@ -17,8 +17,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _flappyBird.widget,
+    return Scaffold(
+      body: _flappyBird.widget,
     );
   }
 }
