@@ -2,6 +2,7 @@ import 'package:flame/components/text_component.dart';
 import 'package:flame/game/base_game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/position.dart';
+import 'package:flame/text_config.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
 import 'package:flappy_bird/controller/dash_controller.dart';
 import 'package:flappy_bird/controller/enemy_controller.dart';
@@ -21,7 +22,15 @@ class FlappyBird extends BaseGame with TapDetector {
     add(_theme);
 
     score = 0;
-    _scoreTextComponent = TextComponent(score.toString());
+    _scoreTextComponent = TextComponent(
+      score.toString(),
+      config: TextConfig(
+        fontFamily: "AudioWide",
+        fontSize: 24.0,
+        textAlign: TextAlign.center,
+        color: Colors.white,
+      ),
+    );
     add(_scoreTextComponent);
 
     _dash = DashController();

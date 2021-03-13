@@ -55,8 +55,9 @@ class EnemyController extends AnimationComponent {
     this.width = this.height = kCoronaEnemySize;
 
     this.x = size.width;
-    this.y = (size.height / 4) +
-        Random().nextInt(size.height.toInt() - (size.height ~/ 4));
+    this.y = (size.height / 6) +
+        Random().nextInt(
+            (size.height.toInt() - size.height ~/ 6) - (size.height ~/ 6));
     print(this.y);
   }
 
