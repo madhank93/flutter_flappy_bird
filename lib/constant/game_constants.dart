@@ -4,3 +4,4 @@ const String kCoronaEnemyImage = "enemy/corona-sprite.png";
 const double kCoronaEnemySize = 80;
 const String kHelicopterEnemyImage = "enemy/helicopter-sprite.png";
 const double kHelicopterEnemySize = 80;
+const double kEnemySize = 80;

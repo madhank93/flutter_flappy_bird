@@ -2,6 +2,7 @@ import 'package:flame/components/text_component.dart';
 import 'package:flame/game/base_game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/position.dart';
+import 'package:flappy_bird/constant/game_constants.dart';
 import 'package:flappy_bird/controller/dash_controller.dart';
 import 'package:flappy_bird/controller/enemy_controller.dart';
 import 'package:flappy_bird/controller/enemy_manager.dart';
@@ -44,7 +45,7 @@ class FlappyBird extends BaseGame with TapDetector {
 
     components.whereType<EnemyController>().forEach((enemy) {
       print(_dash.distance(enemy));
-      if (_dash.distance(enemy) < 20) {
+      if (_dash.distance(enemy) < kEnemySize) {
         _dash.hitAnimation();
       }
     });
