@@ -17,6 +17,7 @@ class DashController extends AnimationComponent {
   bool _isHit;
   ValueNotifier<int> life;
   int topOrBottomTouchCount = 0;
+  Size _size;
 
   DashController() : super.empty() {
     _isHit = false;
@@ -51,6 +52,7 @@ class DashController extends AnimationComponent {
   @override
   void resize(Size size) {
     super.resize(size);
+    _size = size;
 
     this.width = this.height = kDashSize;
     _minimumHeight = _minimumHeight + size.height;
@@ -90,6 +92,11 @@ class DashController extends AnimationComponent {
 
   void jump() {
     this.y = this.y - 25;
+  }
+
+  void resetGame() {
+    topOrBottomTouchCount = 0;
+    this.y = _size.height / 2;
   }
 
   bool isFlying() {

@@ -8,8 +8,6 @@ import 'package:flappy_bird/constant/game_constants.dart';
 import 'package:flappy_bird/controller/dash_controller.dart';
 import 'package:flappy_bird/controller/enemy_controller.dart';
 import 'package:flappy_bird/controller/enemy_manager.dart';
-import 'package:flappy_bird/model/enemy.dart';
-import 'package:flappy_bird/model/enemy_type.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flutter/material.dart';
 
@@ -103,7 +101,7 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
                   icon: Icon(Icons.replay),
                   onPressed: () {
                     resetGame();
-                    removeWidgetOverlay("gameOverMenu");
+                    removeWidgetOverlay('gameOverMenu');
                     resumeEngine();
                   })
             ],
@@ -113,14 +111,17 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     );
   }
 
-  resetGame() {
+  void resetGame() {
     score = 0;
+    _dash.resetGame();
     _dash.life.value = 3;
     _dash.flyAnimation();
     _enemyManager.resetGame();
-    components.whereType<EnemyController>().forEach((enemy) {
-      markToRemove(enemy);
-    });
+    components.whereType<EnemyController>().forEach(
+      (enemy) {
+        markToRemove(enemy);
+      },
+    );
   }
 
   @override
