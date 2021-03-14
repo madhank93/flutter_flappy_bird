@@ -1,3 +1,4 @@
+import 'package:flappy_bird/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 
 class GameOverMenu extends StatelessWidget {
@@ -16,7 +17,7 @@ class GameOverMenu extends StatelessWidget {
         color: Colors.white.withOpacity(0.5),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 50,
+            horizontal: 30,
             vertical: 40,
           ),
           child: Column(
@@ -31,12 +32,41 @@ class GameOverMenu extends StatelessWidget {
                 "Your score is $score",
                 style: TextStyle(fontSize: 30),
               ),
-              IconButton(
-                  iconSize: 50,
-                  icon: Icon(Icons.replay),
-                  onPressed: () {
-                    onPressed.call();
-                  })
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.menu_open),
+                    iconSize: 40,
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return MainMenu();
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  Text(
+                    "Main menu",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  IconButton(
+                    iconSize: 40,
+                    icon: Icon(Icons.replay),
+                    onPressed: () {
+                      onPressed.call();
+                    },
+                  ),
+                  Text(
+                    "Reset",
+                    style: TextStyle(fontSize: 20),
+                  )
+                ],
+              )
             ],
           ),
         ),
