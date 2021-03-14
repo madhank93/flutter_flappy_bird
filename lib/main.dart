@@ -1,5 +1,5 @@
 import 'package:flame/flame.dart';
-import 'package:flappy_bird/screens/home_page.dart';
+import 'package:flappy_bird/screens/main_menu.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Dash',
       theme: ThemeData(
         fontFamily: 'AudioWide',
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: MainMenu(),
     );
   }
 }

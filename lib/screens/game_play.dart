@@ -1,12 +1,12 @@
-import 'package:flappy_bird/screens/flappy_bird.dart';
+import 'package:flappy_bird/screens/flappy_bird_game_controller.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class GamePlay extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _GamePlayState createState() => _GamePlayState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GamePlayState extends State<GamePlay> {
   FlappyBird _flappyBird;
 
   @override
