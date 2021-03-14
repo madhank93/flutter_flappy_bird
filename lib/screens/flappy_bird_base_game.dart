@@ -73,6 +73,23 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     }
   }
 
+  @override
+  void lifecycleStateChange(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.inactive:
+        _pauseGame();
+        break;
+      case AppLifecycleState.paused:
+        _pauseGame();
+        break;
+      case AppLifecycleState.detached:
+        _pauseGame();
+        break;
+    }
+  }
+
   void gameOver() {
     pauseEngine();
     addWidgetOverlay(
@@ -109,7 +126,10 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
 
   void _pauseGame() {
     pauseEngine();
-    addWidgetOverlay('pauseMenu', PauseMenu(onPressed: _resumeGame));
+    addWidgetOverlay(
+      'pauseMenu',
+      PauseMenu(onPressed: _resumeGame),
+    );
   }
 
   _resumeGame() {
