@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
 
   flame: ^0.29.3
+  hive: ^1.4.4+1
+  path_provider: ^1.6.28
 
 dev_dependencies:
   flutter_test:

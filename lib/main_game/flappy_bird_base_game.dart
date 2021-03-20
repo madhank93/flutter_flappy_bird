@@ -8,6 +8,7 @@ import 'package:flappy_bird/constant/game_constants.dart';
 import 'package:flappy_bird/game_controller/dash_controller.dart';
 import 'package:flappy_bird/game_controller/enemy_controller.dart';
 import 'package:flappy_bird/game_controller/enemy_manager.dart';
+import 'package:flappy_bird/main_game/audio_manager.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flappy_bird/widgets/game_over_menu.dart';
 import 'package:flappy_bird/widgets/hud.dart';
@@ -90,15 +91,27 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     }
   }
 
-  void gameOver() {
+  @override
+  void resize(Size size) {
+    super.resize(size);
+    _scoreTextComponent.setByPosition(
+      Position((size.width / 2 - _scoreTextComponent.width / 2), 0),
+    );
+  }
+
+  void _pauseGame() {
     pauseEngine();
     addWidgetOverlay(
-      'gameOverMenu',
-      GameOverMenu(
-        onPressed: resetGame,
-        score: score,
-      ),
+      'pauseMenu',
+      PauseMenu(onPressed: _resumeGame),
     );
+    AudioManager.instance.pauseBgm();
+  }
+
+  _resumeGame() {
+    removeWidgetOverlay("pauseMenu");
+    resumeEngine();
+    AudioManager.instance.resumeBgm();
   }
 
   void resetGame() {
@@ -114,26 +127,18 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     );
     removeWidgetOverlay('gameOverMenu');
     resumeEngine();
+    AudioManager.instance.resumeBgm();
   }
 
-  @override
-  void resize(Size size) {
-    super.resize(size);
-    _scoreTextComponent.setByPosition(
-      Position((size.width / 2 - _scoreTextComponent.width / 2), 0),
-    );
-  }
-
-  void _pauseGame() {
+  void gameOver() {
     pauseEngine();
     addWidgetOverlay(
-      'pauseMenu',
-      PauseMenu(onPressed: _resumeGame),
+      'gameOverMenu',
+      GameOverMenu(
+        onPressed: resetGame,
+        score: score,
+      ),
     );
-  }
-
-  _resumeGame() {
-    removeWidgetOverlay("pauseMenu");
-    resumeEngine();
+    AudioManager.instance.pauseBgm();
   }
 }

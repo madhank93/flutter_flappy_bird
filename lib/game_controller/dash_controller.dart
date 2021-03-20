@@ -6,6 +6,7 @@ import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
 import 'package:flame/time.dart';
 import 'package:flappy_bird/constant/game_constants.dart';
+import 'package:flappy_bird/main_game/audio_manager.dart';
 import 'package:flutter/foundation.dart';
 
 class DashController extends AnimationComponent {
@@ -47,6 +48,8 @@ class DashController extends AnimationComponent {
         spriteSheet.createAnimation(0, from: 1, to: 3, stepTime: .1);
 
     this.animation = _flyAnimation;
+
+    AudioManager.instance.startBgm('bgm.mp3');
   }
 
   @override
@@ -72,6 +75,7 @@ class DashController extends AnimationComponent {
       life.value -= 1;
       _hitAnimationTimer.start();
       _isHit = true;
+      AudioManager.instance.playSfx('hit.wav');
     }
   }
 
@@ -92,6 +96,7 @@ class DashController extends AnimationComponent {
 
   void jump() {
     this.y = this.y - 25;
+    AudioManager.instance.playSfx('jump.wav');
   }
 
   void resetGame() {
