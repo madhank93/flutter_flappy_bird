@@ -32,12 +32,26 @@ class GameOverMenu extends StatelessWidget {
                 "Your score is $score",
                 style: TextStyle(fontSize: 30),
               ),
+              SizedBox(
+                height: 25,
+              ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.menu_open),
-                    iconSize: 40,
-                    onPressed: () {
+                  InkWell(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.menu_open,
+                          size: 40,
+                        ),
+                        Text(
+                          "Main menu",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) {
@@ -47,24 +61,26 @@ class GameOverMenu extends StatelessWidget {
                       );
                     },
                   ),
-                  Text(
-                    "Main menu",
-                    style: TextStyle(fontSize: 20),
-                  ),
                   SizedBox(
                     width: 25,
                   ),
-                  IconButton(
-                    iconSize: 40,
-                    icon: Icon(Icons.replay),
-                    onPressed: () {
+                  InkWell(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.replay,
+                          size: 40,
+                        ),
+                        Text(
+                          "Reset",
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
+                    ),
+                    onTap: () {
                       onPressed.call();
                     },
                   ),
-                  Text(
-                    "Reset",
-                    style: TextStyle(fontSize: 20),
-                  )
                 ],
               )
             ],

@@ -21,6 +21,8 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
   EnemyManager _enemyManager;
   TextComponent _scoreTextComponent;
   int score;
+  bool _isGameOver = false;
+  bool _isGamePaused = false;
 
   FlappyBird() {
     _theme = DashLand();
@@ -52,7 +54,9 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
   @override
   void onTapDown(TapDownDetails details) {
     super.onTapDown(details);
-    _dash.jump();
+    if (!_isGameOver && !_isGamePaused) {
+      _dash.jump();
+    }
   }
 
   @override
@@ -101,15 +105,20 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
 
   void _pauseGame() {
     pauseEngine();
-    addWidgetOverlay(
-      'pauseMenu',
-      PauseMenu(onPressed: _resumeGame),
-    );
+    if (!_isGameOver) {
+      _isGamePaused = true;
+      addWidgetOverlay(
+        'pauseMenu',
+        PauseMenu(onPressed: _resumeGame),
+      );
+    }
+
     AudioManager.instance.pauseBgm();
   }
 
   _resumeGame() {
     removeWidgetOverlay("pauseMenu");
+    _isGamePaused = false;
     resumeEngine();
     AudioManager.instance.resumeBgm();
   }
@@ -120,6 +129,7 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
     _dash.life.value = 3;
     _dash.flyAnimation();
     _enemyManager.resetGame();
+    _isGameOver = false;
     components.whereType<EnemyController>().forEach(
       (enemy) {
         markToRemove(enemy);
@@ -132,6 +142,7 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
 
   void gameOver() {
     pauseEngine();
+    _isGameOver = true;
     addWidgetOverlay(
       'gameOverMenu',
       GameOverMenu(
@@ -140,5 +151,11 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
       ),
     );
     AudioManager.instance.pauseBgm();
+  }
+
+  @override
+  void onDetach() {
+    AudioManager.instance.stopBgm();
+    super.onDetach();
   }
 }

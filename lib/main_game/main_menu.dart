@@ -74,7 +74,9 @@ class MainMenu extends StatelessWidget {
                             fontSize: 25,
                           ),
                         ),
-                        onChanged: (bool value) {},
+                        onChanged: (bool value) {
+                          AudioManager.instance.setSfx(value);
+                        },
                       );
                     },
                   ),
@@ -92,7 +94,9 @@ class MainMenu extends StatelessWidget {
                             fontSize: 25,
                           ),
                         ),
-                        onChanged: (bool value) {},
+                        onChanged: (bool value) {
+                          AudioManager.instance.setBgm(value);
+                        },
                       );
                     },
                   ),
