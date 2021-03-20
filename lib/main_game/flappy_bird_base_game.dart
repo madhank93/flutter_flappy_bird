@@ -9,6 +9,7 @@ import 'package:flappy_bird/game_controller/dash_controller.dart';
 import 'package:flappy_bird/game_controller/enemy_controller.dart';
 import 'package:flappy_bird/game_controller/enemy_manager.dart';
 import 'package:flappy_bird/main_game/audio_manager.dart';
+import 'package:flappy_bird/main_game/high_score_manager.dart';
 import 'package:flappy_bird/theme/dash_land.dart';
 import 'package:flappy_bird/widgets/game_over_menu.dart';
 import 'package:flappy_bird/widgets/hud.dart';
@@ -72,6 +73,10 @@ class FlappyBird extends BaseGame with TapDetector, HasWidgetsOverlay {
         }
       },
     );
+
+    if (score > HighScoreManager.instance.getHighScore) {
+      HighScoreManager.instance.setHighScore(score);
+    }
 
     if (_dash.life.value <= 0) {
       gameOver();

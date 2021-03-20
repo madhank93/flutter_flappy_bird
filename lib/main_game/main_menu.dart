@@ -1,5 +1,6 @@
 import 'package:flappy_bird/main_game/audio_manager.dart';
 import 'package:flappy_bird/main_game/game_play.dart';
+import 'package:flappy_bird/main_game/high_score_manager.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatelessWidget {
@@ -100,6 +101,23 @@ class MainMenu extends StatelessWidget {
                       );
                     },
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Highscore: ',
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
+                      Text(
+                        HighScoreManager.instance.getHighScore.toString(),
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

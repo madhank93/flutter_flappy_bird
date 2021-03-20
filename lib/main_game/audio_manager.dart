@@ -1,5 +1,5 @@
 import 'package:flame/flame.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
 class AudioManager {

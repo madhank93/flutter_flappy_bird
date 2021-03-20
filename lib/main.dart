@@ -1,4 +1,5 @@
 import 'package:flame/flame.dart';
+import 'package:flappy_bird/main_game/high_score_manager.dart';
 import 'package:flappy_bird/main_game/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -15,6 +16,7 @@ void main() async {
   Hive.init(dir.path);
 
   await AudioManager.instance.init(['bgm.mp3', 'hit.wav', 'jump.wav']);
+  await HighScoreManager.instance.init();
 
   runApp(MyApp());
 }
