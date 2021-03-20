@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dash',
+      title: 'Dash Fly',
       theme: ThemeData(
         fontFamily: 'AudioWide',
         primarySwatch: Colors.blue,
