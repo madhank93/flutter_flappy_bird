@@ -1,4 +1,4 @@
-import 'package:flappy_bird/screens/game_play.dart';
+import 'package:flappy_bird/main_game/game_play.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatelessWidget {
@@ -58,7 +58,31 @@ class MainMenu extends StatelessWidget {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  SwitchListTile(
+                    activeColor: Colors.greenAccent[700],
+                    inactiveTrackColor: Colors.redAccent[400],
+                    value: true,
+                    title: Text(
+                      'SFX',
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                    onChanged: (bool value) {},
+                  ),
+                  SwitchListTile(
+                    activeColor: Colors.greenAccent[700],
+                    inactiveTrackColor: Colors.redAccent[400],
+                    value: false,
+                    title: Text(
+                      'BGM',
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                    onChanged: (bool value) {},
+                  ),
                 ],
               ),
             ),

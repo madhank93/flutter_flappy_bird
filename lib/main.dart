@@ -1,5 +1,5 @@
 import 'package:flame/flame.dart';
-import 'package:flappy_bird/screens/main_menu.dart';
+import 'package:flappy_bird/main_game/main_menu.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

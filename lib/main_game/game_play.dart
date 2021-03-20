@@ -1,4 +1,4 @@
-import 'package:flappy_bird/screens/flappy_bird_base_game.dart';
+import 'package:flappy_bird/main_game/flappy_bird_base_game.dart';
 import 'package:flutter/material.dart';
 
 class GamePlay extends StatefulWidget {

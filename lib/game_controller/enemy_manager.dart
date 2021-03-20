@@ -4,9 +4,9 @@ import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/time.dart';
-import 'package:flappy_bird/controller/enemy_controller.dart';
+import 'package:flappy_bird/game_controller/enemy_controller.dart';
 import 'package:flappy_bird/model/enemy_type.dart';
-import 'package:flappy_bird/screens/flappy_bird_base_game.dart';
+import 'package:flappy_bird/main_game/flappy_bird_base_game.dart';
 
 class EnemyManager extends Component with HasGameRef<FlappyBird> {
   Random _random;
